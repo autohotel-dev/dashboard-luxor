@@ -1,8 +1,84 @@
 @import "tailwindcss";
 
+/* ========================================
+   🎨 SISTEMA DE TEMAS - LUXOR DASHBOARD
+   ======================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Colores Base */
+  --background: #f3f4f6;
+  --foreground: #111827;
+  --card: #ffffff;
+  --card-foreground: #111827;
+  
+  /* Colores de Texto */
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  
+  /* Colores de Estado */
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --warning: #ea580c;
+  --info: #0891b2;
+  
+  /* Bordes */
+  --border: #e5e7eb;
+  --border-strong: #d1d5db;
+  
+  /* Sombras */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+/* Modo Oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f172a;
+    --foreground: #f1f5f9;
+    --card: #1e293b;
+    --card-foreground: #f1f5f9;
+    
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    
+    --border: #334155;
+    --border-strong: #475569;
+  }
+}
+
+/* Clase para forzar modo claro */
+.theme-light {
+  --background: #f3f4f6;
+  --foreground: #111827;
+  --card: #ffffff;
+  --card-foreground: #111827;
+  
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  
+  --border: #e5e7eb;
+  --border-strong: #d1d5db;
+}
+
+/* Clase para forzar modo oscuro */
+.theme-dark {
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+  --card: #1e293b;
+  --card-foreground: #f1f5f9;
+  
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --border: #334155;
+  --border-strong: #475569;
 }
 
 @theme inline {
@@ -12,15 +88,49 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ========================================
+   🎯 CLASES UTILITARIAS DE TEXTO
+   ======================================== */
+
+.text-primary {
+  color: var(--text-primary) !important;
+}
+
+.text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+/* ========================================
+   📦 ESTILOS DE CARD
+   ======================================== */
+
+.card {
+  background-color: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+}
+
+/* ========================================
+   🔧 OVERRIDES IMPORTANTES
+   ======================================== */
+
+/* Asegurar que todos los valores sean legibles */
+.value-text {
+  color: var(--text-primary) !important;
+  font-weight: 500;
+}
+
+.label-text {
+  color: var(--text-secondary) !important;
+  font-size: 0.875rem;
 }
