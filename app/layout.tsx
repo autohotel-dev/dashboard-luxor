@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "@/components/Layout/LayoutWrapper";
+import ServiceWorkerRegister from "@/components/PWA/ServiceWorkerRegister";
+import InstallPrompt from "@/components/PWA/InstallPrompt";
 import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -9,6 +11,28 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Auto Hotel Luxor - Dashboard",
   description: "Dashboard de administración para Auto Hotel Luxor",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Luxor Dashboard",
+  },
+  icons: {
+    icon: [
+      { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512x512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/icon-152x152.png", sizes: "152x152", type: "image/png" },
+    ],
+  },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
+  themeColor: "#1f2937",
 };
 
 export default function RootLayout({
@@ -19,6 +43,8 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={inter.className}>
+        <ServiceWorkerRegister />
+        <InstallPrompt />
         <div className="min-h-screen bg-gray-100">
           <LayoutWrapper>
             {children}

@@ -49,7 +49,7 @@ export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
       {/* Header con botón cerrar (solo mobile) */}
       <div className="flex items-center justify-between mb-8">
         <div className="flex-1">
-          <h1 className="text-2xl font-bold text-center">🏨 Luxor</h1>
+          <h1 className="text-2xl font-bold text-center">🏨 Auto Hotel Luxor</h1>
           <p className="text-xs text-gray-400 text-center mt-1">Dashboard</p>
         </div>
         {/* Botón cerrar solo en mobile */}
