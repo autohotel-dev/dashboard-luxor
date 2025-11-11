@@ -118,7 +118,7 @@ export default function ReservationsPage() {
                 {/* Acciones */}
                 <div className="flex flex-col sm:flex-row gap-2 pt-4 border-t border-gray-200">
                   <Link href={`/reservations/${reservation._id}`} className="flex-1">
-                    <Button size="sm" variant="outline" className="w-full">
+                    <Button size="sm" variant="outline" className="w-full lg:w-auto flex items-center justify-center">
                       Ver detalle
                     </Button>
                   </Link>
@@ -128,7 +128,7 @@ export default function ReservationsPage() {
                       size="sm" 
                       variant="success"
                       onClick={() => handleConfirm(reservation._id)}
-                      className="w-full sm:w-auto"
+                      className="w-full sm:w-auto flex items-center justify-center"
                     >
                       <CheckCircle className="w-4 h-4 mr-1" />
                       Confirmar
@@ -140,7 +140,7 @@ export default function ReservationsPage() {
                       size="sm" 
                       variant="danger"
                       onClick={() => handleCancel(reservation._id)}
-                      className="w-full sm:w-auto"
+                      className="w-full sm:w-auto flex items-center justify-center"
                     >
                       <XCircle className="w-4 h-4 mr-1" />
                       Cancelar

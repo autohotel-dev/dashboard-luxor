@@ -196,15 +196,15 @@ export default function UsersPage() {
                 </div>
 
                 {/* Acciones */}
-                <div className="flex flex-col space-y-2 ml-4">
+                <div className="flex flex-col justify-center space-y-2 ml-4">
                   <Link href={`/users/${user.phone}`}>
-                    <Button size="sm" variant="primary">
+                    <Button size="sm" variant="primary" className="w-full">
                       Ver perfil
                     </Button>
                   </Link>
                   <Link href={`/reservations?user=${user.phone}`}>
-                    <Button size="sm" variant="outline">
-                      Ver reservas
+                    <Button size="sm" variant="outline" className="w-full">
+                      Ver reservaciones
                     </Button>
                   </Link>
                 </div>

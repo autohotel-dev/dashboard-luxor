@@ -296,6 +296,7 @@ export default function ReservationDetailPage() {
               <Button
                 variant="primary"
                 onClick={() => handleUpdateStatus('completed')}
+                className="flex items-center justify-center"
               >
                 <CheckCircle className="w-4 h-4 mr-2" />
                 Marcar como Completada
