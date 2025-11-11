@@ -54,6 +54,7 @@ export interface Reservation {
   confirmationCode: string;
   paymentDeadline?: string;
   paidAt?: string;
+  paymentProof?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -153,7 +154,8 @@ export const usersAPI = {
 
 export const messagesAPI = {
   getByUser: (phone: string, limit = 100) => api.get(`/messages/user/${phone}`, { params: { limit } }),
-  getStats: () => api.get('/messages/stats')
+  getStats: () => api.get('/messages/stats'),
+  sendMessage: (phone: string, message: string) => api.post('/messages/send', { phone, message })
 };
 
 // ============================================
