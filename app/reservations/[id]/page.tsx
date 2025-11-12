@@ -45,10 +45,10 @@ export default function ReservationDetailPage() {
 
     try {
       await reservationsAPI.updateStatus(params.id as string, status);
-      
+
       // Enviar notificación por WhatsApp
       let message = '';
-      
+
       if (status === 'confirmed') {
         message = `🎉 ¡Excelente noticia! Tu pago ha sido verificado y aceptado correctamente.\n\n` +
           `✅ Tu reserva ha sido confirmada:\n` +
@@ -67,7 +67,7 @@ export default function ReservationDetailPage() {
           `🔑 Código: ${reservation.confirmationCode}\n\n` +
           `Si tienes alguna pregunta o deseas hacer una nueva reserva, estamos para ayudarte. 💙`;
       }
-      
+
       // Enviar mensaje solo si hay un mensaje preparado
       if (message && reservation.userPhone) {
         try {
@@ -80,12 +80,32 @@ export default function ReservationDetailPage() {
       } else {
         toast.success('Estado actualizado');
       }
-      
+
       fetchReservation();
     } catch (error) {
       toast.error('Error al actualizar estado');
     }
   };
+
+  function getSodasOrder() {
+    if (!reservation || !reservation.sodas || reservation.sodas.length === 0) return '';
+
+    // Contar las ocurrencias de cada refresco
+    const sodaCount: { [key: string]: number } = {};
+    
+    reservation.sodas.forEach((soda) => {
+      if (soda) {
+        sodaCount[soda] = (sodaCount[soda] || 0) + 1;
+      }
+    });
+
+    // Formatear el resultado como "3 Coca-Cola, 2 Sprite, 1 Fanta"
+    const result = Object.entries(sodaCount)
+      .map(([soda, count]) => `(${count}) ${soda}`)
+      .join(', ');
+
+    return result;
+  }
 
   if (loading) {
     return (
@@ -208,11 +228,11 @@ export default function ReservationDetailPage() {
               <div className="flex lg:hidden items-center justify-between">
                 {reservation.paymentProof && (
                   <div>
-                    <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="w-full flex items-center justify-center"
-                    onClick={() => window.open(reservation.paymentProof, '_blank')}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full flex items-center justify-center"
+                      onClick={() => window.open(reservation.paymentProof, '_blank')}
                     >
                       <Eye className="w-4 h-4 mr-2" />
                       Ver Comprobante
@@ -225,13 +245,13 @@ export default function ReservationDetailPage() {
               {reservation.paymentProof && (
                 <div>
                   <p className="text-sm text-gray-500">Comprobante de Pago</p>
-                  <Image 
-                  src={reservation.paymentProof} 
-                  alt="Comprobante de Pago" 
-                  width={200} 
-                  height={200} 
-                  className="w-full h-auto"
-                  onClick={() => window.open(reservation.paymentProof, '_blank')}
+                  <Image
+                    src={reservation.paymentProof}
+                    alt="Comprobante de Pago"
+                    width={200}
+                    height={200}
+                    className="w-full h-auto"
+                    onClick={() => window.open(reservation.paymentProof, '_blank')}
                   />
                 </div>
               )}
@@ -249,6 +269,20 @@ export default function ReservationDetailPage() {
                 <p className="font-medium text-gray-900">{reservation.specialRequests}</p>
               </div>
             )}
+
+            {reservation.bottle && (
+              <div>
+                <p className="text-sm text-gray-500">Botella</p>
+                <p className="font-medium text-gray-900">{reservation.bottle}</p>
+              </div>
+            )}
+            {reservation.sodas && reservation.sodas.length > 0 && (
+              <div>
+                <p className="text-sm text-gray-500">Refrescos</p>
+                <p className="font-medium text-gray-900">{getSodasOrder()}</p>
+              </div>
+            )}
+
             <div>
               <p className="text-sm text-gray-500">Creada el</p>
               <p className="font-medium text-gray-900">{formatDateTime(reservation.createdAt)}</p>

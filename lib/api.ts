@@ -55,6 +55,8 @@ export interface Reservation {
   paymentDeadline?: string;
   paidAt?: string;
   paymentProof?: string;
+  bottle?: string;
+  sodas?: Array<string>;
   createdAt: string;
   updatedAt: string;
 }
